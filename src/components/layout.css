@@ -112,6 +112,8 @@ select,
 textarea {
   font: inherit;
   margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 optgroup {
   font-weight: 700;
