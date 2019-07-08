@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import { navigateTo } from "gatsby-link"
+import ReCAPTCHA from "react-google-recaptcha";
 
 const encode = (data) => {
   return Object.keys(data)
       .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
       .join("&");
 }
+
+const RECAPTCHA_KEY = process.env.SITE_RECAPTCHA_KEY;
+
 
 export default class Contact extends Component {
   constructor(props) {
@@ -14,6 +18,10 @@ export default class Contact extends Component {
   }
 
   handleChange = e => {this.setState({[e.target.name]: e.target.value})};
+
+  handleRecaptcha = value => {
+    this.setState({ "g-recaptcha-response": value });
+  };
 
   handleSubmit = e => {
     const form = e.target;
@@ -64,6 +72,12 @@ export default class Contact extends Component {
            onChange={this.handleChange} 
            rows="9" 
            required placeholder="write something"
+          />
+
+          <ReCAPTCHA
+            ref="recaptcha"
+            sitekey={RECAPTCHA_KEY}
+            onChange={this.handleRecaptcha}
           />
           
           <input type="hidden" name="form-name" value="contact" />
