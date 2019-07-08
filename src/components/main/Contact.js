@@ -80,7 +80,7 @@ export default class Contact extends Component {
             onChange={this.handleRecaptcha}
           />
           
-          <input type="hidden" name="form-name" value="contact" />
+          <input type="hidden" name="form-name" value="contact" data-netlify-recaptcha="true"/>
           
           <button id="form-input" type="submit">Send to Email</button>
         </form>  
